@@ -16,7 +16,7 @@ The piece tells her story through a bouncing basketball. Tap the ball. Each boun
 
 ## What's Inside
 
-A single self-contained `index.html` file. No frameworks. No build tools. No dependencies to install. Everything — HTML, CSS, and JavaScript — lives in one file and loads instantly.
+A single self-contained `index.html` file. No frameworks. No build tools. No dependencies to install. Everything (HTML, CSS, and JavaScript) lives in one file and loads instantly.
 
 External resources loaded via CDN:
 - **Google Fonts** Barlow and Barlow Condensed
