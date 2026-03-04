@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Raven!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@600;700;800;900&display=swap');
+
+  :root {
+    --garnet: #73000A;
+    --gold: #C8A84B;
+    --black: #0A0A0A;
+    --off-white: #F5F3EE;
+    --mid-gray: #888;
+    --light-gray: #E8E5E0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--off-white);
+    font-family: 'Barlow', sans-serif;
+    color: var(--black);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* BANNER */
+  .banner {
+    width: 100%;
+    background: var(--garnet);
+    color: var(--off-white);
+    text-align: center;
+    padding: 9px 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .banner span { color: var(--gold); }
+
+  /* WRAPPER */
+  .wrap {
+    width: 100%;
+    max-width: 700px;
+    padding: 0 24px;
+  }
+
+  /* HEADER */
+  header {
+    padding: 28px 0 16px;
+    border-bottom: 2px solid var(--black);
+  }
+  h1 {
+    font-family: 'Barlow', sans-serif;
+    font-size: clamp(30px, 7vw, 58px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  h1 span { color: var(--garnet); }
+
+  .subhead {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+  .subhead strong { color: var(--black); font-weight: 700; }
+
+  /* MAIN */
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding-top: 24px;
+  }
+  .full { width: 100%; }
+
+  .ball-hint {
+    text-align: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 6px;
+  }
+
+  .ball-zone {
+    width: 100%;
+    height: 320px;
+    cursor: pointer;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-bottom: 3px solid var(--black);
+  }
+
+  /* STAT CARD */
+  .stat-card {
+    width: 100%;
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1.5px solid var(--light-gray);
+    padding: 22px 28px;
+    position: relative;
+    background: #fff;
+    transition: opacity 0.5s ease;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--garnet);
+  }
+  .stat-number {
+    font-family: 'Barlow', sans-serif;
+    font-size: clamp(44px, 10vw, 68px);
+    font-weight: 900;
+    color: var(--garnet);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-top: 8px;
+  }
+  .stat-note {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    color: var(--mid-gray);
+    margin-top: 5px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .stat-counter {
+    position: absolute;
+    right: 18px;
+    bottom: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--light-gray);
+    text-transform: uppercase;
+  }
+
+  /* SEC BAND */
+  .sec-band {
+    width: 100%;
+    background: var(--garnet);
+    color: var(--off-white);
+    padding: 22px 24px;
+    display: flex;
+    align-items: stretch;
+  }
+  .sec-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 20px;
+  }
+  .sec-block:last-child { padding-right: 0; }
+  .sec-div {
+    width: 1px;
+    background: rgba(255,255,255,0.2);
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+  .sec-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .sec-award {
+    font-family: 'Barlow', sans-serif;
+    font-size: clamp(13px, 2vw, 16px);
+    font-weight: 700;
+    line-height: 1.3;
+    flex: 1;
+  }
+  .sec-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245,243,238,0.5);
+    margin-top: 6px;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    width: 100%;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+  }
+
+  /* STAT GRID */
+  .stat-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 2px solid var(--black);
+    border-left: 1.5px solid var(--light-gray);
+  }
+  .grid-cell {
+    padding: 13px 11px;
+    border-right: 1.5px solid var(--light-gray);
+    border-bottom: 1.5px solid var(--light-gray);
+  }
+  .grid-cell .num {
+    font-family: 'Barlow', sans-serif;
+    font-size: 19px;
+    font-weight: 900;
+    color: var(--garnet);
+    white-space: nowrap;
+  }
+  .grid-cell .lbl {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-top: 4px;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* FOOTER */
+  footer {
+    width: 100%;
+    max-width: 700px;
+    padding: 12px 24px 36px;
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  footer .src  { color: var(--garnet); }
+  footer .date { color: var(--mid-gray); white-space: nowrap; }
+
+  /* MOBILE */
+  @media (max-width: 540px) {
+    .banner { font-size: 10.5px; }
+    h1 { font-size: clamp(26px, 8vw, 40px); }
+    .subhead .hide-mobile { display: none; }
+    .sec-band { flex-direction: column; gap: 18px; }
+    .sec-div  { display: none; }
+    .sec-block { padding: 0; }
+    .sec-award { font-size: 17px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .grid-cell .lbl { white-space: normal; }
+    footer {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      white-space: normal;
+      gap: 5px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <span>Go Gamecocks</span> · SEC Tournament Opens Today · March 4, 2026
+</div>
+
+<div class="wrap">
+  <header>
+    <h1>Happy Birthday, <span>Raven!</span></h1>
+    <div class="subhead">
+      Guard · #25 · Senior · <strong>Atlanta, GA</strong> · Westlake HS · <strong class="hide-mobile">South Carolina </strong><strong>Gamecocks</strong>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="full">
+      <div class="ball-hint">Tap the ball · New stat every bounce</div>
+      <div class="ball-zone"><canvas id="c"></canvas></div>
+    </div>
+
+    <div class="stat-card full" id="card">
+      <div class="stat-number" id="sNum">136–7</div>
+      <div class="stat-label"  id="sLbl">Career Record with Johnson on the Floor</div>
+      <div class="stat-note"   id="sNote">One of the most dominant winning records in women's college basketball history.</div>
+      <div class="stat-counter" id="sCtr">1 / 14</div>
+    </div>
+
+    <div class="sec-band">
+      <div class="sec-block">
+        <div class="sec-title">2025–2026 SEC Awards</div>
+        <div class="sec-award">SEC Defensive Player of the Year</div>
+        <div class="sec-sub">South Carolina · 2025–2026</div>
+      </div>
+      <div class="sec-div"></div>
+      <div class="sec-block">
+        <div class="sec-title">All Conference</div>
+        <div class="sec-award">All-SEC Second Team</div>
+        <div class="sec-sub">Announced March 3, 2026</div>
+      </div>
+      <div class="sec-div"></div>
+      <div class="sec-block">
+        <div class="sec-title">Career SEC Honors</div>
+        <div class="sec-award">3× SEC Academic Honor Roll</div>
+        <div class="sec-sub">2022–2023 · 2023–2024 · 2024–2025</div>
+      </div>
+    </div>
+
+    <div class="full">
+      <div class="section-label">Career by the Numbers</div>
+    </div>
+
+    <div class="stat-grid full">
+      <div class="grid-cell"><div class="num">136–7</div><div class="lbl">Career Record on Floor</div></div>
+      <div class="grid-cell"><div class="num">2×</div><div class="lbl">Natl. Champion 2022 · 2024</div></div>
+      <div class="grid-cell"><div class="num">Four</div><div class="lbl">Final Fours · Every Season</div></div>
+      <div class="grid-cell"><div class="num">Five</div><div class="lbl">SEC Regular Season Titles</div></div>
+      <div class="grid-cell"><div class="num">410</div><div class="lbl">Career Assists · 10th All-Time SC</div></div>
+      <div class="grid-cell"><div class="num">54</div><div class="lbl">NCAA Tourney Assists · SC Record</div></div>
+      <div class="grid-cell"><div class="num">9.8</div><div class="lbl">PPG Senior Year · Career Best</div></div>
+      <div class="grid-cell"><div class="num">3.50</div><div class="lbl">Assist-TO Ratio · 2025–2026</div></div>
+      <div class="grid-cell"><div class="num">5.4</div><div class="lbl">APG Senior Year</div></div>
+      <div class="grid-cell"><div class="num">38–0</div><div class="lbl">Record · Sophomore 2023–2024</div></div>
+      <div class="grid-cell"><div class="num">4×</div><div class="lbl">HS State Champ · Westlake</div></div>
+      <div class="grid-cell"><div class="num">#1</div><div class="lbl">PG in Nation · ESPN 2021</div></div>
+      <div class="grid-cell"><div class="num">6'2"</div><div class="lbl">Wingspan · Guard Position</div></div>
+      <div class="grid-cell"><div class="num">R1</div><div class="lbl">Projected WNBA Pick · Apr. 13</div></div>
+      <div class="grid-cell"><div class="num">99th</div><div class="lbl">Offensive Rating Percentile</div></div>
+      <div class="grid-cell"><div class="num">1st</div><div class="lbl">Woman Ever · Iverson Classic</div></div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <span class="src">Sources: GamecocksOnline · Sports Reference · ESPN · CBS Sports</span>
+  <span class="date">Raven Johnson · 23rd Birthday Tribute · March 4, 2026</span>
+</footer>
+
+<script>
+const stats = [
+  { num:"136–7",  lbl:"Career Record with Johnson on the Floor",          note:"One of the most dominant winning records in women's college basketball history." },
+  { num:"2×",     lbl:"National Champion",                                 note:"2022 and 2024. Back-to-back rings in Columbia. Two titles in four years." },
+  { num:"Four",   lbl:"Final Fours · Every Single Season",                note:"2022 · 2023 · 2024 · 2025. Every year Raven played, South Carolina was in the Final Four." },
+  { num:"Five",   lbl:"SEC Regular Season Titles",                         note:"She won the SEC every single year she wore garnet and black." },
+  { num:"410",    lbl:"Career Assists · 10th All-Time at South Carolina",  note:"114 games. She made everyone around her better from the first day she stepped on the floor." },
+  { num:"54",     lbl:"NCAA Tournament Assists · SC All-Time Record",      note:"The best passing record in Gamecock postseason history. Built in the biggest moments." },
+  { num:"9.8",    lbl:"Points Per Game · Senior Year · Career Best",       note:"She saved her best scoring season for last. Always improving, always competing." },
+  { num:"3.50",   lbl:"Assist-to-Turnover Ratio · 2025–2026",             note:"Best of her career. Elite decision-making. The definition of a true point guard." },
+  { num:"38–0",   lbl:"Record · Sophomore Season · 2023–2024",            note:"The undefeated national championship run. Thirty-eight wins. Zero losses. Perfection." },
+  { num:"4×",     lbl:"High School State Champion · Westlake Lions",      note:"2018 through 2021. Four straight titles before she ever played a college game." },
+  { num:"#1",     lbl:"Point Guard in the Nation · ESPN Class of 2021",   note:"5-star recruit · No. 2 overall nationally. The expectations were high. She exceeded them." },
+  { num:"DPOY",   lbl:"SEC Defensive Player of the Year · 2025–2026",    note:"The Seatbelt Gang is real. Announced March 3, 2026 — the day before her birthday." },
+  { num:"6'2\"",  lbl:"Wingspan · Guard Position",                         note:"Rare length for a point guard. The physical foundation of her elite on-ball defense." },
+  { num:"R1",     lbl:"Projected WNBA First Round Pick · April 13, 2026", note:"The next chapter is calling. Washington Mystics and Atlanta Dream among the projected fits." },
+];
+
+let idx = 0, launched = false, lastFloor = false;
+const card  = document.getElementById('card');
+const sNum  = document.getElementById('sNum');
+const sLbl  = document.getElementById('sLbl');
+const sNote = document.getElementById('sNote');
+const sCtr  = document.getElementById('sCtr');
+
+function showStat(i) {
+  card.style.opacity = 0;
+  setTimeout(() => {
+    sNum.textContent  = stats[i].num;
+    sLbl.textContent  = stats[i].lbl;
+    sNote.textContent = stats[i].note;
+    sCtr.textContent  = `${i + 1} / ${stats.length}`;
+    card.style.opacity = 1;
+  }, 400);
+}
+
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+const DPR    = window.devicePixelRatio || 1;
+let W, H, bx, by, vx = 0, vy = 0, radius;
+
+function resize() {
+  const r = canvas.parentElement.getBoundingClientRect();
+  W = canvas.width  = r.width  * DPR;
+  H = canvas.height = r.height * DPR;
+  canvas.style.width  = r.width  + 'px';
+  canvas.style.height = r.height + 'px';
+  radius = Math.min(W, H) * 0.20;
+  if (!launched) { bx = W / 2; by = H - radius - 4 * DPR; }
+}
+window.addEventListener('resize', resize);
+resize();
+
+bx = W / 2;
+by = H - radius - 4 * DPR;
+
+// Real-basketball-feel physics — slow, high arc, like a PG walking the ball up court
+const gravity     = 0.22 * DPR;   // slower arc — more hang time, easier to read stats
+const bouncePower = 0.68;          // natural energy loss per bounce
+const minBounceVY = -9 * DPR;     // minimum upward velocity to keep arc visible
+const launchVY    = -10 * DPR;    // first launch — controlled arc, stays in canvas
+const launchVX    = -1.2 * DPR;   // drives left — Raven is a lefty
+
+function drawBall(x, y, r) {
+  // Floor shadow — scales with height for realism
+  const shadowScale = 1 - ((H - radius - y) / H) * 0.6;
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(x, H - 5 * DPR, r * 0.7 * shadowScale, r * 0.11 * shadowScale, 0, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(0,0,0,${0.10 * shadowScale})`;
+  ctx.fill();
+  ctx.restore();
+
+  // Ball body
+  const g = ctx.createRadialGradient(x - r * 0.25, y - r * 0.25, r * 0.05, x, y, r);
+  g.addColorStop(0,   '#D4621A');
+  g.addColorStop(0.5, '#B8420E');
+  g.addColorStop(1,   '#5A1200');
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fillStyle = g;
+  ctx.fill();
+
+  // Seams
+  ctx.strokeStyle = '#111';
+  ctx.lineWidth   = 2.5 * DPR;
+  ctx.beginPath(); ctx.moveTo(x - r, y); ctx.lineTo(x + r, y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x, y - r); ctx.lineTo(x, y + r); ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(x - r * 0.42, y, r * 0.88, -Math.PI * 0.33, Math.PI * 0.33);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(x + r * 0.42, y, r * 0.88, Math.PI * 0.67, Math.PI * 1.33);
+  ctx.stroke();
+
+  // Highlight
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(x - r * 0.28, y - r * 0.3, r * 0.2, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(255,255,255,0.09)';
+  ctx.fill();
+  ctx.restore();
+
+  // Tap prompt
+  if (!launched) {
+    ctx.fillStyle    = 'rgba(255,255,255,0.88)';
+    ctx.font         = `700 ${10 * DPR}px Barlow, sans-serif`;
+    ctx.textAlign    = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('TAP TO START', x, y);
+  }
+}
+
+function loop() {
+  ctx.clearRect(0, 0, W, H);
+
+  if (launched) {
+    vy += gravity;
+    bx += vx;
+    by += vy;
+
+    const floor = H - radius - 4 * DPR;
+
+    // Side wall bounces — ball stays on screen, no wrapping
+    if (bx - radius < 0) {
+      bx = radius;
+      vx = Math.abs(vx);
+    } else if (bx + radius > W) {
+      bx = W - radius;
+      vx = -Math.abs(vx);
+    }
+
+    // Ceiling boundary — ball never escapes top of canvas
+    if (by - radius < 0) {
+      by = radius;
+      vy = Math.abs(vy) * 0.5;
+    }
+
+    if (by >= floor) {
+      by = floor;
+      vy *= -bouncePower;
+      vx *= 0.98;
+
+      // Keep arc at a consistent readable height — never too small
+      if (Math.abs(vy) < Math.abs(minBounceVY) * 0.65) {
+        vy = minBounceVY;
+        vx = (Math.random() > 0.5 ? 1 : -1) * (0.8 + Math.random() * 1.0) * DPR;
+      }
+
+      if (!lastFloor) {
+        idx = (idx + 1) % stats.length;
+        showStat(idx);
+      }
+      lastFloor = true;
+    } else {
+      lastFloor = false;
+    }
+
+    if (bx >  W + radius) bx = -radius;
+    if (bx < -radius)      bx =  W + radius;
+  }
+
+  drawBall(bx, by, radius);
+  requestAnimationFrame(loop);
+}
+loop();
+
+canvas.addEventListener('click', () => {
+  try {
+    if (!launched) {
+      launched = true;
+      vy = launchVY;
+      vx = launchVX;
+    } else {
+      vy = -10 * DPR;
+      vx = (Math.random() > 0.5 ? 1 : -1) * (0.8 + Math.random() * 1.2) * DPR;
+      idx = (idx + 1) % stats.length;
+      showStat(idx);
+      lastFloor = false;
+    }
+  } catch(e) { console.warn('Ball interaction error:', e); }
+});
+</script>
+</body>
+</html>
