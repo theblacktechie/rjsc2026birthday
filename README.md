@@ -29,14 +29,14 @@ External resources loaded via CDN:
 |------|-------|
 | Career Record (with Johnson on floor) | 136–7 |
 | National Championships | 2× (2022, 2024) |
-| Final Fours | Four — every season |
+| Final Fours | Four: every season |
 | SEC Regular Season Titles | Five |
 | Career Assists | 410 — 10th all-time at SC |
-| NCAA Tournament Assists | 54 — SC all-time record |
-| High School State Titles | 4× — Westlake Lions |
-| Recruiting Rank | #1 PG in nation — ESPN Class of 2021 |
+| NCAA Tournament Assists | 54: SC all-time record |
+| High School State Titles | 4× Westlake Lions |
+| Recruiting Rank | #1 PG in nation ESPN Class of 2021 |
 | SEC Defensive Player of the Year | 2025–2026 |
-| Projected WNBA Draft | Round 1 — April 13, 2026 |
+| Projected WNBA Draft | Round 1: April 13, 2026 |
 
 ---
 
